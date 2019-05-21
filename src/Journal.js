@@ -6,19 +6,11 @@ const db = firebase.firestore();
 export default class Journal extends React.Component {
     state = {
         journalEntries: [],
-        user: null,
         entry: ''
     }
 
     componentDidMount() {
-        const currentUser = firebase.auth().currentUser;
-        if (!currentUser) {
-            return this.props.history.push('/');
-        }
-        
         this.unsubscribeJournal = db
-            .collection('users')
-            .doc(currentUser.uid)
             .collection('journalEntries')
             .onSnapshot(snapshot => {
                 this.setState({
@@ -27,13 +19,8 @@ export default class Journal extends React.Component {
             });
     }
 
-    // Check if the unsubscribeJournal reference exists (could possibly not exist
-    // if the !currentUser branch was taken in componentDidMount)
-    // This unsubscribe ensures there's not multiple listeners when navigating between pages
     componentWillUnmount() {
-        if (this.unsubscribeJournal) {
-            this.unsubscribeJournal();
-        }
+        this.unsubscribeJournal();
     }
 
     // Sets the input field onChange
@@ -46,10 +33,8 @@ export default class Journal extends React.Component {
         // Prevent default form action (will otherwise cause a redirect)
         event.preventDefault();
 
-        // Push a journal entry object to /users/{uid}/journalEntries
+        // Push a journal entry object to /journalEntries
         db
-            .collection('users')
-            .doc(firebase.auth().currentUser.uid)
             .collection('journalEntries')
             .add({entry: this.state.entry});
 

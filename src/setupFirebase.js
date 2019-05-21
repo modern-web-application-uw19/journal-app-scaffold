@@ -4,7 +4,7 @@ import 'firebase/firestore';
 
 // Initialize Cloud Firestore + auth through Firebase
 firebase.initializeApp({
-    apiKey: 'TODO: Add API Key',
+    apiKey: 'TODO: Add apiKey',
     authDomain: 'TODO: Add authDomain',
-    projectId: 'TODO: Add projectId'
+    projectId: 'TODO: add projectId'
 });
