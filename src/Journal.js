@@ -1,7 +1,8 @@
 import React from 'react';
 import firebase from 'firebase';
 
-const db = firebase.firestore();
+// TODO: #2 Initialize firestore
+// const db = firebase.firestore();
 
 export default class Journal extends React.Component {
     state = {
@@ -10,17 +11,19 @@ export default class Journal extends React.Component {
     }
 
     componentDidMount() {
-        this.unsubscribeJournal = db
-            .collection('journalEntries')
-            .onSnapshot(snapshot => {
-                this.setState({
-                    journalEntries: snapshot.docs
-                });
-            });
+        // TODO: #3 Subscribe to a collection and "observe" any data changes, then put in state
+        // this.unsubscribeJournal = db
+        //     .collection('journalEntries')
+        //     .onSnapshot(snapshot => {
+        //         this.setState({
+        //             journalEntries: snapshot.docs
+        //         });
+        //     });
     }
 
     componentWillUnmount() {
-        this.unsubscribeJournal();
+        // TODO: #4 Unsubscribe on unMount
+        // this.unsubscribeJournal();
     }
 
     // Sets the input field onChange
@@ -34,9 +37,10 @@ export default class Journal extends React.Component {
         event.preventDefault();
 
         // Push a journal entry object to /journalEntries
-        db
-            .collection('journalEntries')
-            .add({entry: this.state.entry});
+        // TODO: #6 Push data to collection
+        // db
+        //     .collection('journalEntries')
+        //     .add({entry: this.state.entry});
 
         // Clear the input field
         this.setState({entry: ''});
@@ -44,13 +48,14 @@ export default class Journal extends React.Component {
 
     render() {
         const journalEntries = this.state.journalEntries.map(journalEntry => {
-            return (
-                // .id gets the generated id for this object
-                <li key={journalEntry.id}>
-                    {/* .data() gets the object stored */}
-                    {journalEntry.data().entry}
-                </li>
-            );
+            // TODO: #5 Map through collection and access .id and .data() for id/data respectively
+            // return (
+            //     // .id gets the generated id for this object
+            //     <li key={journalEntry.id}>
+            //         {/* .data() gets the object stored */}
+            //         {journalEntry.data().entry}
+            //     </li>
+            // );
         });
 
         return (
