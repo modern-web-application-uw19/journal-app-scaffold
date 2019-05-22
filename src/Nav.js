@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import firebase from 'firebase';
 
 class Nav extends React.Component {
@@ -15,4 +15,4 @@ class Nav extends React.Component {
     }
 }
 
-export default withRouter(Nav);
+export default Nav;
