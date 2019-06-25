@@ -1,3 +1,18 @@
+## Firebase rules
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /journalEntries/{document=**} {
+      allow read, write;
+    }
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth.uid == userId
+    }
+  }
+}
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
